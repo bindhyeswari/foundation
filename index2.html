@@ -5,6 +5,7 @@
     <title>To Do List</title>
     <link rel="stylesheet" href="css/foundation.css"/>
     <script src="bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="bower_components/foundation-icons/foundation_icons_general/stylesheets/general_foundicons.css"/>
     <script>
         angular.module('toDoApp', []).controller('ToDoCtrl', function ($scope) {
             $scope.todos = [{
@@ -23,6 +24,12 @@
                     $scope.newtask = {};
 
             };
+            $scope.makeComplete = function (task) {
+                task.complete = true;
+            };
+            $scope.deleteTask = function (task) {
+                $scope.todos.splice($scope.todos.indexOf(task), 1);
+            }
         });
     </script>
     <style>
@@ -32,6 +39,14 @@
         }
         li.task {
             padding: 0.5em;
+        }
+        li.done {
+            background-color: greenyellow;
+        }
+        i.selector:hover {
+            color: #640200;
+            text-shadow: 0 0 5px red;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -50,8 +65,11 @@
         </div>
 
         <ul class="small-block-grid-0 medium-block-grid-3 large-block-grid-3">
-            <li ng-repeat="task in todos" class="task" >
+            <li ng-repeat="task in todos" class="task" ng-class="{done: task.complete}">
                 <div ><span>{{task.title}}</span> : <span>{{task.priority}}</span></div>
+                <i class="foundicon-photo selector" ng-click="makeComplete(task)" ng-hide="task.complete"></i>
+                <i class="foundicon-checkmark" ng-show="task.complete"></i>
+                <i class="foundicon-remove selector" ng-click="deleteTask(task)"></i>
             </li>
         </ul>
     </div>

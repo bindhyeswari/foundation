@@ -1,0 +1,38 @@
+$company-blue: #5c8fee
+@mixin fulltexteffect($color)
+  background-color: lighten($color, 20%)
+  text-shadow: 1px 1px 1px lighten($color, 40%)
+  color: darken($color, 20%)
+  border: none
+
+@mixin inlineblock($padding: 0.25em 1em, $margin: 0.15em)
+  display: inline-block
+  padding: $padding
+  margin: $margin
+
+/* Placeholder selectors */
+%button-span
+  padding: 0.25em 0.55em
+  border: 1px solid $company-blue
+  @include inlineblock
+
+.save
+  @extend %button-span
+  @include fulltexteffect(#52d84e)
+
+.delete
+  @extend %button-span
+  @include fulltexteffect(#d83709)
+
+h1
+  font: 200 5em 'helvetica neue'
+  color: lighten($company-blue, 20%)
+  background: $company-blue
+  padding: 0.15em
+  text-shadow: 1px 1px 1px darken($company-blue, 20%)
+
+body
+  font: 200 1em 'helvetica neue'
+
+span.data
+  @include inlineblock(0.15em 0.55em, 0.35em)
