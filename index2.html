@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="toDoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/foundation.css"/>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        angular.module('toDoApp', []).controller('ToDoCtrl', function ($scope) {
+            $scope.todos = [{
+                title: 'Finish revising Foundation components ... ',
+                priority: 3
+            }, {
+                title: 'Finish Quicksort blog and discuss McMillan\'s underperforming code ... ',
+                priority: 6
+            }];
+            $scope.newtask = {};
+            $scope.createTask = function (event) {
+                console.log(event);
+
+                    console.log($scope.newtask);
+                    $scope.todos.unshift($scope.newtask);
+                    $scope.newtask = {};
+
+            };
+        });
+    </script>
+    <style>
+        body {
+            font: 200 1em 'Helvetica Neue';
+            padding: 1em;
+        }
+        li.task {
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ToDoCtrl">
+        <div class="row">
+            <div class="large-8 columns">
+                <input type="text" placeholder="Task title" ng-model="newtask.title"/>
+            </div>
+            <div class="large-2 columns">
+                <input type="text" placeholder="Task Priority" ng-model="newtask.priority"/>
+            </div>
+            <div class="large-2 columns">
+                <a ng-click="createTask($event)" href="#" class="button tiny">Create Task</a>
+            </div>
+        </div>
+
+        <ul class="small-block-grid-0 medium-block-grid-3 large-block-grid-3">
+            <li ng-repeat="task in todos" class="task" >
+                <div ><span>{{task.title}}</span> : <span>{{task.priority}}</span></div>
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+</html>
